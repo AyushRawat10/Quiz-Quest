@@ -42,7 +42,7 @@ html, body {
     height: 100vh;
     max-width: 1620px;
     margin: auto;
-    background-image: url("../quest-icon/main-bg.png");
+    background-image: url("quest-icon/main-bg.png");
     background-size:cover ;
 }
 
@@ -174,7 +174,7 @@ html, body {
     height: 100vh;
     max-width: inherit;
     margin: auto;
-    background-image: url("../quest-icon/light-bg.png");
+    background-image: url("quest-icon/light-bg.png");
 }
 
 .nav {
@@ -212,7 +212,8 @@ html, body {
 
 .nav > .nav-content > .nav-content-all {
     display: flex;
-    gap: 8px;
+    gap: 6px;
+    align-items: center;
     height: 30px;
     position: relative;
 }
@@ -431,7 +432,7 @@ html, body {
     height: 100vh;
     max-width: inherit;
     margin: auto;
-    background-image: url("../quest-icon/result-bg.png");
+    background-image: url("quest-icon/result-bg.png");
 }
 
 #quiz > .quiz-inner-div > .head {
@@ -450,6 +451,9 @@ html, body {
     border-radius: 20px;
     box-shadow: 0 5px 10px #cccccc;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #quiz > .quiz-inner-div > .head > .progress-bar {
@@ -686,6 +690,7 @@ html, body {
 
 .foot > .next-btn {
     display: flex;
+    visibility: hidden;
     gap: 10px;
     background-color: #fff;
     padding: 10px 30px;
@@ -717,14 +722,14 @@ html, body {
     height: 100vh;
     max-width: 1620px;
     margin: auto;
-    /* display: none; */
+    display: none;
 }
 
 #result > .result-inner-div {
     height: 100vh;
     max-width: inherit;
     margin: auto;
-    background-image: url("../quest-icon/result-bg.png");
+    background-image: url("quest-icon/result-bg.png");
 }
 
 #result > .result-inner-div > .result-navbar {
@@ -1012,6 +1017,7 @@ html, body {
 
     .body > .answer-box > .answers {
         height: 100px;
+        font-size: 10px;
     }
 
 }
@@ -1096,7 +1102,7 @@ html, body {
 
     .body > .answer-box > .answers {
         height: 80px;
-        width: 200px;
+        width: 230px;
     }
 }
 
@@ -1137,7 +1143,8 @@ html, body {
 
     .body > .answer-box > .answers {
         height: 80px;
-        width: 180px;
+        width: 220px;
+        font-size: 9px;
     }
 
     .left-nav-box > .result-nav-heading > h1 {

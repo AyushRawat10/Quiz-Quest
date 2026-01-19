@@ -1,25 +1,24 @@
-document.addEventListener("DOMContentLoaded", function() {
-    let bodyDiv = document.querySelector("#body");
-    let playButton = document.querySelector(".play-button");
-    let mainDiv = document.querySelector("#main");
-    let selectQuizCategory = document.querySelector(".select-content");
-    let quizDiv = document.querySelector("#quiz");
-    let nextquestionButton = document.querySelector(".next-btn");
-    let questionDiv = document.querySelector(".question");
-    let questionDivBox = document.querySelector(".question-box");
+document.addEventListener("DOMContentLoaded", function () {
 
-    playButton.addEventListener("click", function() {
-        mainDiv.style.display = "initial";
-        bodyDiv.style.display = "none";
-    })
+    const bodyDiv = document.querySelector("#body");
+    const playButton = document.querySelector(".play-button");
+    const mainDiv = document.querySelector("#main");
+    const selectQuizCategory = document.querySelector(".select-content");
+    const quizDiv = document.querySelector("#quiz");
+    const nextquestionButton = document.querySelector(".next-btn");
+    const questionDiv = document.querySelector(".question");
+    const answerButton = document.querySelectorAll(".answer-text");
+    const answerButtonDiv = document.querySelectorAll(".answers");
+    const resultDiv = document.querySelector("#result");
+    const resultMarks = document.querySelector("#marks");
+    const accuracy = document.querySelector("#accuracy");
 
-    selectQuizCategory.addEventListener("click", function() {
-        mainDiv.style.display = "none";
-        quizDiv.style.display = "initial";
-        // displayQuestion();
-    })
-    
-    let spaceRelatedQuiz = [
+    let selectedAnswer = [];
+    let index = 0;
+    let questionIndex = 0;
+    let correctAnswer = 0;
+
+    const spaceRelatedQuiz = [ 
         {
             question: "Which planet is known as the",
             keynote: "Red Planet ?",
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         {
             question: "What is the name of our",
             keynote: "Galaxy ?",
-            option: ["Andromeda", "Black Eye Galaxy", "Milky Way", "Whirlpool"],
+            option: ["Andromeda", "Orion", "Milky Way", "Whirlpool"],
             answer: "Milky Way"
         },
         {
@@ -39,10 +38,10 @@ document.addEventListener("DOMContentLoaded", function() {
             answer: "Saturn"
         },
         {
-            question: "What is the closest star to",
-            keynote: "Earth ?",
-            option: ["Proxima Centauri", "Sirius", "Alpha Centauri", "The Sun"],
-            answer: "The Sun"
+            question: "What is the outermost layer of the",
+            keynote: "Sun called?",
+            option: ["Core", "Photosphere", "Chromosphere", "Corona"],
+            answer: "Corona"
         },
         {
             question: "Which planet is famous for its",
@@ -79,21 +78,103 @@ document.addEventListener("DOMContentLoaded", function() {
             keynote: "Gas Giant ?",
             option: ["Mars", "Earth", "Jupiter", "Mercury"],
             answer: "Jupiter"
-        },
-    ];
-    
-    
-        function displayQuestion() {
-            let index = 0;
-            while(index < 10) {
-                questionDiv.innerHTML = `
-                    <h1>${spaceRelatedQuiz[index].question} <span>${spaceRelatedQuiz[index].keynote}</span></h1>
-                `;
-                questionDivBox.appendChild(questionDiv);
-
-                nextquestionButton.onclick = index++;
-            }
         }
+    ];
+
+
+    function showQuiz() {
+        mainDiv.style.display = "none";
+        quizDiv.style.display = "initial";
+        renderQuestion();
+        renderOptions();
+    }
+
+    function renderQuestion() {
+        const q = spaceRelatedQuiz[index];
+        if(index < spaceRelatedQuiz.length) {
+            questionDiv.innerHTML = `
+            <h1>
+                ${q.question}
+                <span id="key-word">${q.keynote}</span>
+            </h1>
+            `;
+        } else {
+            return;
+        }
+    }
+
+    function renderOptions() {
+        if(index < spaceRelatedQuiz.length) {
+            const options = spaceRelatedQuiz[index].option;
+            answerButton.forEach((btn, i) => {
+                btn.innerHTML = `<h1>${options[i]}</h1>`;
+            });
+        } else {
+            return;
+        }
+    }
+
+    function renderResult() {
+        nextquestionButton.addEventListener("click", function() {
+            quizDiv.style.display = "none";
+            resultDiv.style.display = "initial";
+            answerCheck();
+            displayResult();
+            correctAnswer = 0;
+        })
+    }
+
+    function goToNextQuestion() {
+        index++;
+        questionIndex++;
+
+        renderQuestion();
+        renderOptions();
+        nextquestionButton.style.visibility = "hidden";
+    }
+
+  
+
+    playButton.addEventListener("click", () => {
+        mainDiv.style.display = "initial";
+        bodyDiv.style.display = "none";
+    });
+
+    selectQuizCategory.addEventListener("click", showQuiz);
+
     
-    console.log("JS running");
-})
+    nextquestionButton.addEventListener("click", () => {
+        if (index + 1 === spaceRelatedQuiz.length) {
+            nextquestionButton.firstElementChild.textContent = "Submit";
+            renderResult();
+        } else {
+            goToNextQuestion();
+        }
+    });
+
+    function answerMark() {
+        
+        answerButtonDiv.forEach(answer => {
+            answer.addEventListener("click", function () {
+                nextquestionButton.style.visibility = "visible";
+                selectedAnswer[questionIndex] = this.lastElementChild.textContent;
+            });
+
+        });
+
+    }
+    answerMark();
+
+    function answerCheck() {
+        for(let i = 0; i < spaceRelatedQuiz.length; i++)
+        if(spaceRelatedQuiz[i].answer === selectedAnswer[i]) {
+            correctAnswer++;
+        };
+    }
+    
+    function displayResult() {
+        resultMarks.textContent = correctAnswer;
+        accuracy.textContent = `${correctAnswer * 10}%`
+    }
+    
+});
