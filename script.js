@@ -12,12 +12,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const resultDiv = document.querySelector("#result");
     const resultMarks = document.querySelector("#marks");
     const accuracy = document.querySelector("#accuracy");
+    const cancelButton = document.querySelector(".cancel");
+    const progressBarLoad = document.querySelector(".progress-bar-loader");
+    const timerText = document.querySelector(".timer-text");
+    const displayTime = document.querySelector(".time-left-box h2")
 
     let selectedAnswer = [];
     let index = 0;
     let questionIndex = 0;
     let correctAnswer = 0;
     let categoryIndex;
+    let minute = 0;
+    let second = 0;
+    let timer = null;
+    let m, s;
 
     const quizData = [
         [ 
@@ -399,12 +407,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function showQuiz() {
         mainDiv.style.display = "none";
         quizDiv.style.display = "initial";
+        progressBarLoad.style.width = "0%";
         renderQuestion();
         renderOptions();
     }
 
     function renderQuestion() {
-        // console.log(quizData[categoryIndex]);
         
         const q = quizData[categoryIndex][index];
         if(index < quizData[categoryIndex].length) {
@@ -443,6 +451,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function goToNextQuestion() {
         index++;
         questionIndex++;
+        
 
         renderQuestion();
         renderOptions();
@@ -456,6 +465,7 @@ document.addEventListener("DOMContentLoaded", function () {
         bodyDiv.style.display = "none";
     });
 
+// Add Event Listner....
     selectQuizCategory.forEach((eachCategory) => {
         eachCategory.addEventListener("click", function() {
             if (this.classList.contains("space")) {
@@ -472,6 +482,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 categoryIndex = 5;
             }
             showQuiz();
+            timerFunction();
         })
         
     })
@@ -480,18 +491,35 @@ document.addEventListener("DOMContentLoaded", function () {
     nextquestionButton.addEventListener("click", () => {
         if (index + 1 === quizData[categoryIndex].length) {
             nextquestionButton.firstElementChild.textContent = "Submit";
+            progressBarLoad.style.width = `${(index + 1) * 10}%`;
+            resetFunction();
             renderResult();
         } else {
             goToNextQuestion();
+            progressBarLoad.style.width = `${index * 10}%`;
         }
     });
+
+    cancelButton.addEventListener("click", function() {
+        mainDiv.style.display = "initial";
+        quizDiv.style.display = "none";
+        selectedAnswer = [];
+        index = 0;
+        questionIndex = 0;
+        correctAnswer = 0;
+        categoryIndex = 0;
+        resetFunction();
+    })
+
+// End of event listner....
 
     function answerMark() {
         
         answerButtonDiv.forEach(answer => {
-            answer.addEventListener("click", function () {
+            answer.addEventListener("click", function (e) {
                 nextquestionButton.style.visibility = "visible";
                 selectedAnswer[questionIndex] = this.lastElementChild.textContent;
+                
             });
 
         });
@@ -499,16 +527,53 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     answerMark();
 
+
+    function timerFunction() {
+        clearInterval(timer);
+        
+
+        timer = setInterval(() => {
+            if(minute < 10) {
+                m = "0" + minute;
+            } else {
+                m = minute;
+            }
+
+            if(second < 10) {
+                s = "0" + second;
+            } else {
+                s = second;
+            }
+
+            second++;
+            
+            if(second === 60) {
+                minute++;
+                second = 0;
+            }
+            
+            timerText.textContent = `${m}:${s}`;
+        }, 1000);
+    }
+
+    function resetFunction() {
+        clearInterval(timer);
+        minute = 0;
+        second = 0;
+        timerText.textContent = "00:00";
+    }
+
     function answerCheck() {
         for(let i = 0; i < quizData[categoryIndex].length; i++)
-        if(quizData[categoryIndex][i].answer === selectedAnswer[i]) {
-            correctAnswer++;
-        };
+            if(quizData[categoryIndex][i].answer === selectedAnswer[i]) {
+                correctAnswer++;
+            };
     }
     
     function displayResult() {
         resultMarks.textContent = correctAnswer;
-        accuracy.textContent = `${correctAnswer * 10}%`
+        accuracy.textContent = `${correctAnswer * 10}%`;
+        displayTime.textContent = `${m}:${s}`;
     }
     
 });
