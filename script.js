@@ -15,11 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const accuracy = document.querySelector("#accuracy");
     const cancelButton = document.querySelector(".cancel");
     const progressBarLoad = document.querySelector(".progress-bar-loader");
+    const progressBarNumber = document.querySelector("#single-level");
     const timerText = document.querySelector(".timer-text");
     const displayTime = document.querySelector(".time-left-box h2");
     const displayPoints = document.querySelector(".points-number");
     const playAgainBtn = document.querySelector(".play-again");
     const homeButton = document.querySelector(".home");
+    const resultImage = document.querySelector(".result-image");
 
     let selectedAnswer = [];
     let index = 0;
@@ -411,12 +413,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
     ]
 
-
-
     function showQuiz() {
         mainDiv.style.display = "none";
         quizDiv.style.display = "initial";
         progressBarLoad.style.width = "0%";
+        progressBarNumber.textContent = "0";
         displayPoints.textContent = "0";
         renderQuestion();
         renderOptions();
@@ -509,6 +510,7 @@ document.addEventListener("DOMContentLoaded", function () {
             click = 0;
             if (index + 1 === quizData[categoryIndex].length) {
                 progressBarLoad.style.width = `${(index + 1) * 10}%`;
+                progressBarNumber.textContent = index + 1;
                 resetFunction();
                 renderResult();
                 return;
@@ -516,9 +518,9 @@ document.addEventListener("DOMContentLoaded", function () {
             
             goToNextQuestion();
             progressBarLoad.style.width = `${index * 10}%`;
+            progressBarNumber.textContent = index;
         }, 400)
     });
-    
 
     cancelButton.addEventListener("click", function() {
         mainDiv.style.display = "initial";
@@ -552,14 +554,34 @@ document.addEventListener("DOMContentLoaded", function () {
         optionReset();
     })
 
+    homeButton.addEventListener("click", function() {
+        resultDiv.style.display = "none";
+        quizDiv.style.display = "none";
+        mainDiv.style.display = "none";
+        bodyDiv.style.display = "initial"
+        sumbitButton.style.display = "none";
+        nextquestionButton.style.display = "flex";
+        nextquestionButton.style.visibility = "hidden";
+        displayPoints.textContent = "0";
+        progressBarLoad.style.width = "0%";
+        selectedAnswer = [];
+        index = 0;
+        questionIndex = 0;
+        correctAnswer = 0;
+        categoryIndex = undefined;
+        points = 0;
+        click = 0;
+        isAnswered = false;
+        resetFunction();
+        optionReset();
+    })
+
 // End of event listner....
 
     function answerMark() {
         answerButtonDiv.forEach(answer => {
-            
             answer.addEventListener("click", function () {
                 
-                // this.style.backgroundColor = "#fff000"
                 answer.style.backgroundColor = "#ffe600"
                 answer.style.boxShadow = "0 7px 0 #e1d400"
                 answer.firstElementChild.style.backgroundColor = "#fff174"
@@ -580,7 +602,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     click = 0;
                 }
             });
-
             
         });
 
@@ -657,6 +678,18 @@ document.addEventListener("DOMContentLoaded", function () {
         resultMarks.textContent = correctAnswer;
         accuracy.textContent = `${correctAnswer * 10}%`;
         displayTime.textContent = `${m}:${s}`;
+
+        for(let resultIndex = 0; resultIndex <= quizData[categoryIndex].length; resultIndex++) {
+            if(correctAnswer === resultIndex) {
+                let resultImg = document.createElement("img");
+                resultImg.setAttribute("src", `quest-icon/result-${resultIndex}.png`);
+                resultImg.alt = "Result Image";
+                resultImage.appendChild(resultImg);
+                return;
+            }
+        }
     }
+
+
     
 });

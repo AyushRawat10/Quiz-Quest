@@ -42,8 +42,14 @@ html, body {
     height: 100vh;
     max-width: 1620px;
     margin: auto;
+}
+
+#body > .body-inner-div {
+    height: 100vh;
+    max-width: inherit;
+    margin: auto;
     background-image: url("quest-icon/main-bg.png");
-    background-size:cover ;
+    background-size: cover;
 }
 
 .container {
