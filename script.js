@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectQuizCategory = document.querySelectorAll(".select-content");
     const quizDiv = document.querySelector("#quiz");
     const nextquestionButton = document.querySelector(".next-btn");
+    const sumbitButton = document.querySelector(".submit-btn");
     const questionDiv = document.querySelector(".question");
     const answerButton = document.querySelectorAll(".answer-text");
     const answerButtonDiv = document.querySelectorAll(".answers");
@@ -15,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelButton = document.querySelector(".cancel");
     const progressBarLoad = document.querySelector(".progress-bar-loader");
     const timerText = document.querySelector(".timer-text");
-    const displayTime = document.querySelector(".time-left-box h2")
+    const displayTime = document.querySelector(".time-left-box h2");
+    const displayPoints = document.querySelector(".points-number");
+    const playAgainBtn = document.querySelector(".play-again");
+    const homeButton = document.querySelector(".home");
 
     let selectedAnswer = [];
     let index = 0;
@@ -26,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let second = 0;
     let timer = null;
     let m, s;
+    let points = 0;
+    let click = 0;
+    let isAnswered = false;
+    let answerColor;
+    let optionVariable;
 
     const quizData = [
         [ 
@@ -408,6 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mainDiv.style.display = "none";
         quizDiv.style.display = "initial";
         progressBarLoad.style.width = "0%";
+        displayPoints.textContent = "0";
         renderQuestion();
         renderOptions();
     }
@@ -439,22 +449,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderResult() {
-        nextquestionButton.addEventListener("click", function() {
-            quizDiv.style.display = "none";
-            resultDiv.style.display = "initial";
-            answerCheck();
-            displayResult();
-            correctAnswer = 0;
-        })
+        sumbitButton.style.display = "flex";
+        nextquestionButton.style.display = "none";
+            sumbitButton.addEventListener("click", function() {
+                quizDiv.style.display = "none";
+                resultDiv.style.display = "initial";
+                answerCheck();
+                displayResult();
+                correctAnswer = 0;
+            })
     }
 
     function goToNextQuestion() {
         index++;
         questionIndex++;
         
-
+        isAnswered = false;
         renderQuestion();
         renderOptions();
+        optionReset();
         nextquestionButton.style.visibility = "hidden";
     }
 
@@ -487,18 +500,25 @@ document.addEventListener("DOMContentLoaded", function () {
         
     })
 
-    
     nextquestionButton.addEventListener("click", () => {
-        if (index + 1 === quizData[categoryIndex].length) {
-            nextquestionButton.firstElementChild.textContent = "Submit";
-            progressBarLoad.style.width = `${(index + 1) * 10}%`;
-            resetFunction();
-            renderResult();
-        } else {
+        if (isAnswered) return;
+        isAnswered = true;
+        trueOrFalse();
+        let delayFunc = setTimeout(() => {
+            displayPoints.textContent = points;
+            click = 0;
+            if (index + 1 === quizData[categoryIndex].length) {
+                progressBarLoad.style.width = `${(index + 1) * 10}%`;
+                resetFunction();
+                renderResult();
+                return;
+            }
+            
             goToNextQuestion();
             progressBarLoad.style.width = `${index * 10}%`;
-        }
+        }, 400)
     });
+    
 
     cancelButton.addEventListener("click", function() {
         mainDiv.style.display = "initial";
@@ -511,22 +531,71 @@ document.addEventListener("DOMContentLoaded", function () {
         resetFunction();
     })
 
+    playAgainBtn.addEventListener("click", function() {
+        resultDiv.style.display = "none";
+        quizDiv.style.display = "none";
+        mainDiv.style.display = "initial";
+        sumbitButton.style.display = "none";
+        nextquestionButton.style.display = "flex";
+        nextquestionButton.style.visibility = "hidden";
+        displayPoints.textContent = "0";
+        progressBarLoad.style.width = "0%";
+        selectedAnswer = [];
+        index = 0;
+        questionIndex = 0;
+        correctAnswer = 0;
+        categoryIndex = undefined;
+        points = 0;
+        click = 0;
+        isAnswered = false;
+        resetFunction();
+        optionReset();
+    })
+
 // End of event listner....
 
     function answerMark() {
-        
         answerButtonDiv.forEach(answer => {
-            answer.addEventListener("click", function (e) {
+            
+            answer.addEventListener("click", function () {
+                
+                // this.style.backgroundColor = "#fff000"
+                answer.style.backgroundColor = "#ffe600"
+                answer.style.boxShadow = "0 7px 0 #e1d400"
+                answer.firstElementChild.style.backgroundColor = "#fff174"
+                optionReset(this);
+                answerColor = "red";
+                optionVariable = this
+                
                 nextquestionButton.style.visibility = "visible";
                 selectedAnswer[questionIndex] = this.lastElementChild.textContent;
-                
+
+                if (quizData[categoryIndex][index].answer === this.lastElementChild.textContent) {
+                    points = points + 25;
+                    click = 1;
+                    answerColor = "green";
+                    optionVariable = this
+                } else if (quizData[categoryIndex][index].answer !== this.lastElementChild.textContent && click === 1) {
+                    points = points - 25;
+                    click = 0;
+                }
             });
 
+            
         });
 
     }
     answerMark();
 
+    function optionReset(option) {
+        answerButtonDiv.forEach(answer => {
+            if (answer !== option) {
+                answer.style.background = "";
+                answer.firstElementChild.style.backgroundColor = "";
+                answer.style.boxShadow = "";
+            }
+        })
+    }
 
     function timerFunction() {
         clearInterval(timer);
@@ -554,6 +623,20 @@ document.addEventListener("DOMContentLoaded", function () {
             
             timerText.textContent = `${m}:${s}`;
         }, 1000);
+    }
+  
+    function trueOrFalse() {
+        
+        if(answerColor === "green") {
+            optionVariable.style.backgroundColor = "#49e400";
+            optionVariable.style.boxShadow = "0 7px 0 #3cbe00"
+            optionVariable.firstElementChild.style.backgroundColor = "#92ff60"
+        } else if(answerColor === "red") {
+            optionVariable.style.backgroundColor = "#ea0000";
+            optionVariable.style.boxShadow = "0 7px 0 #9c0000";
+            optionVariable.firstElementChild.style.backgroundColor = "#fa2b2b"
+        }
+
     }
 
     function resetFunction() {

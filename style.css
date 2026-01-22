@@ -610,16 +610,16 @@ html, body {
 }
 
 .body > .answer-box > .answer-2 {
-    background-color: #48db7e;
-    box-shadow: 0 7px 0 #19a54d;
+    background-color: #00e8e1;
+    box-shadow: 0 7px 0 #00c0b9;
 }
 
 .body > .answer-box > .answer-2 > .option-box {
-    background-color: #73E496;
+    background-color: #0ff6ee;
 }
 
 .body > .answer-box > .answer-3 {
-    background-color: #FB933C;
+    background-color: #fd831e;
     box-shadow: 0 7px 0 #E75A0D;
 } 
 
@@ -699,7 +699,23 @@ html, body {
     transition: transform 0.3s ease;
 }
 
+.foot > .submit-btn {
+    display: none;
+    /* visibility: hidden; */
+    gap: 10px;
+    background-color: #fff;
+    padding: 10px 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 10px #cccccc;
+    transition: transform 0.3s ease;
+}
+
 .foot > .next-btn:hover {
+    background-color: var(--secondary-blue-color);
+    color: #fff;
+}
+
+.foot > .submit-btn:hover {
     background-color: var(--secondary-blue-color);
     color: #fff;
 }
@@ -708,11 +724,23 @@ html, body {
     transform: scale(0.95);
 }
 
+.foot > .submit-btn:active {
+    transform: scale(0.95);
+}
+
 .foot > .next-btn > h3 {
     font-size: var(--font-md);
 }
 
+.foot > .submit-btn > h3 {
+    font-size: var(--font-md);
+}
+
 .foot > .next-btn > img {
+    width: 30px;
+}
+
+.foot > .submit-btn > img {
     width: 30px;
 }
 
@@ -1288,12 +1316,16 @@ html, body {
         font-size: var(--font-md);
     }
 
-    .foot > .next-btn {
+    .foot > .next-btn, .submit-btn {
         padding: 15px 15px;
         border-radius: 25px;
     }
 
     .foot > .next-btn > h3 {
+        display: none;
+    }
+
+    .foot > .submit-btn > h3 {
         display: none;
     }
 
