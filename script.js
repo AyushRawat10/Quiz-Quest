@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const answerButtonDiv = document.querySelectorAll(".answers");
     const resultDiv = document.querySelector("#result");
     const resultMarks = document.querySelector("#marks");
+    const totalMarks = document.querySelector("#total-marks");
+    const totalLevel = document.querySelector("#total-level");
     const accuracy = document.querySelector("#accuracy");
     const cancelButton = document.querySelector(".cancel");
     const progressBarLoad = document.querySelector(".progress-bar-loader");
@@ -22,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const playAgainBtn = document.querySelector(".play-again");
     const homeButton = document.querySelector(".home");
     const resultImage = document.querySelector(".result-image");
+    const modeDiv = document.querySelector(".mode");
 
     let selectedAnswer = [];
     let index = 0;
@@ -37,6 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let isAnswered = false;
     let answerColor;
     let optionVariable;
+    let lenghtFinder;
+    let easyMode, mediumMode, restLength;
+    
 
     const quizData = [
         [ 
@@ -99,6 +105,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 keynote: "Gas Giant ?",
                 option: ["Mars", "Earth", "Jupiter", "Mercury"],
                 answer: "Jupiter"
+            },
+            {
+                question: "Question",
+                keynote: "11",
+                option: ["1", "2", "3", "4"],
+                answer: "2"
+            },
+            {
+                question: "Question",
+                keynote: "12",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
             }
         ],
         [
@@ -149,19 +167,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 keynote: "standing up?",
                 option: ["Camel", "Donkey", "Yak", "Horse"],
                 answer: "Horse"
-            },
-            {
-                question: "Which animal is known for its",
-                keynote: "long neck?",
-                option: ["Deer", "Giraffe", "Camel", "Horse"],
-                answer: "Giraffe"
-            },
-            {
-                question: "Which animal is called man's",
-                keynote: "best friend?",
-                option: ["Dog", "Horse", "Cat", "Rabbit"],
-                answer: "Dog"
             }
+            // {
+            //     question: "Which animal is known for its",
+            //     keynote: "long neck?",
+            //     option: ["Deer", "Giraffe", "Camel", "Horse"],
+            //     answer: "Giraffe"
+            // },
+            // {
+            //     question: "Which animal is called man's",
+            //     keynote: "best friend?",
+            //     option: ["Dog", "Horse", "Cat", "Rabbit"],
+            //     answer: "Dog"
+            // }
         ],
         [
             {
@@ -223,7 +241,37 @@ document.addEventListener("DOMContentLoaded", function () {
                 keynote: '"Room Temperature" ?',
                 option: ["Iron", "Copper", "Mercury", "Zinc"],
                 answer: "Mercury"
-            }
+            },
+            {
+                question: "Question",
+                keynote: "11",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
+            },
+            {
+                question: "Question",
+                keynote: "12",
+                option: ["1", "2", "3", "4"],
+                answer: "2"
+            },
+            {
+                question: "Question",
+                keynote: "13",
+                option: ["1", "2", "3", "4"],
+                answer: "3"
+            },
+            {
+                question: "Question",
+                keynote: "14",
+                option: ["1", "2", "3", "4"],
+                answer: "4"
+            },
+            {
+                question: "Question",
+                keynote: "15",
+                option: ["1", "2", "3", "4"],
+                answer: "4"
+            },
         ],
         [
             {
@@ -323,31 +371,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 keynote: "Countries ?",
                 option: ["Asia", "Europe", "America", "Africa"],
                 answer: "Africa"
-            },
-            {
-                question: "Which place do travelers stay",
-                keynote: "Overnight?",
-                option: ["Office", "Restaurent", "Market", "Hotel"],
-                answer: "Hotel"
-            },
-            {
-                question: "Which country uses the currency",
-                keynote: '"Forint" ?',
-                option: ["Poland", "Hungary", "Romania", "Czechia"],
-                answer: "Hungary"
-            },
-            {
-                question: "Which travel item shows",
-                keynote: "Time ?",
-                option: ["Map", "Clock", "Watch", "Compass"],
-                answer: "Watch"
-            },
-            {
-                question: "Which place is visited by",
-                keynote: "Tourists ?",
-                option: ["Radio", "GPS", "Camera", "Charger"],
-                answer: "GPS"
             }
+            // {
+            //     question: "Which place do travelers stay",
+            //     keynote: "Overnight?",
+            //     option: ["Office", "Restaurent", "Market", "Hotel"],
+            //     answer: "Hotel"
+            // },
+            // {
+            //     question: "Which country uses the currency",
+            //     keynote: '"Forint" ?',
+            //     option: ["Poland", "Hungary", "Romania", "Czechia"],
+            //     answer: "Hungary"
+            // },
+            // {
+            //     question: "Which travel item shows",
+            //     keynote: "Time ?",
+            //     option: ["Map", "Clock", "Watch", "Compass"],
+            //     answer: "Watch"
+            // },
+            // {
+            //     question: "Which place is visited by",
+            //     keynote: "Tourists ?",
+            //     option: ["Radio", "GPS", "Camera", "Charger"],
+            //     answer: "GPS"
+            // }
         ],
         [
             {
@@ -409,6 +457,78 @@ document.addEventListener("DOMContentLoaded", function () {
                 keynote: "Fast ?",
                 option: ["Largo", "Allegro", "Adagio", "Lento"],
                 answer: "Allegro"
+            },
+            {
+                question: "Question",
+                keynote: "11",
+                option: ["1", "2", "3", "4"],
+                answer: "2"
+            },
+            {
+                question: "Question",
+                keynote: "12",
+                option: ["1", "2", "3", "4"],
+                answer: "2"
+            },
+            {
+                question: "Question",
+                keynote: "13",
+                option: ["1", "2", "3", "4"],
+                answer: "2"
+            },
+            {
+                question: "Question",
+                keynote: "14",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
+            },
+            {
+                question: "Question",
+                keynote: "15",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
+            },
+            {
+                question: "Question",
+                keynote: "16",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
+            },
+            {
+                question: "Question",
+                keynote: "17",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
+            },
+            {
+                question: "Question",
+                keynote: "18",
+                option: ["1", "2", "3", "4"],
+                answer: "1"
+            },
+            {
+                question: "Question",
+                keynote: "19",
+                option: ["1", "2", "3", "4"],
+                answer: "3"
+            },
+            {
+                question: "Question",
+                keynote: "20",
+                option: ["1", "2", "3", "4"],
+                answer: "3"
+            },
+            {
+                question: "Question",
+                keynote: "21",
+                option: ["1", "2", "3", "4"],
+                answer: "3"
+            },
+            {
+                question: "Question",
+                keynote: "22",
+                option: ["1", "2", "3", "4"],
+                answer: "3"
             }
         ]
     ]
@@ -452,13 +572,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderResult() {
         sumbitButton.style.display = "flex";
         nextquestionButton.style.display = "none";
-            sumbitButton.addEventListener("click", function() {
+            sumbitButton.onclick = function () {
                 quizDiv.style.display = "none";
                 resultDiv.style.display = "initial";
                 answerCheck();
                 displayResult();
+                resetFunction();
                 correctAnswer = 0;
-            })
+            }
     }
 
     function goToNextQuestion() {
@@ -497,9 +618,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             showQuiz();
             timerFunction();
+            lenghtFinder = quizData[categoryIndex].length;
+            totalLevel.textContent = lenghtFinder;
+            mediumMode = Math.floor(lenghtFinder/2);
+            restLength = lenghtFinder - mediumMode;
+            easyMode = Math.floor(restLength/2);
+            modeHandling();
         })
         
     })
+
 
     nextquestionButton.addEventListener("click", () => {
         if (isAnswered) return;
@@ -509,15 +637,16 @@ document.addEventListener("DOMContentLoaded", function () {
             displayPoints.textContent = points;
             click = 0;
             if (index + 1 === quizData[categoryIndex].length) {
-                progressBarLoad.style.width = `${(index + 1) * 10}%`;
+                progressBarLoad.style.width = `${(index + 1) * (100/lenghtFinder)}%`;
                 progressBarNumber.textContent = index + 1;
-                resetFunction();
+                cancelButton.style.visibility = "hidden";
                 renderResult();
                 return;
             }
             
             goToNextQuestion();
-            progressBarLoad.style.width = `${index * 10}%`;
+            modeHandling();
+            progressBarLoad.style.width = `${index * (100/lenghtFinder)}%`;
             progressBarNumber.textContent = index;
         }, 400)
     });
@@ -525,6 +654,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cancelButton.addEventListener("click", function() {
         mainDiv.style.display = "initial";
         quizDiv.style.display = "none";
+        sumbitButton.style.display = "none";
         selectedAnswer = [];
         index = 0;
         questionIndex = 0;
@@ -540,16 +670,18 @@ document.addEventListener("DOMContentLoaded", function () {
         sumbitButton.style.display = "none";
         nextquestionButton.style.display = "flex";
         nextquestionButton.style.visibility = "hidden";
+        cancelButton.style.visibility = "visible"
         displayPoints.textContent = "0";
         progressBarLoad.style.width = "0%";
         selectedAnswer = [];
         index = 0;
         questionIndex = 0;
         correctAnswer = 0;
-        categoryIndex = undefined;
+        categoryIndex = 0;
         points = 0;
         click = 0;
         isAnswered = false;
+        resultImage.innerHTML = "";
         resetFunction();
         optionReset();
     })
@@ -562,21 +694,37 @@ document.addEventListener("DOMContentLoaded", function () {
         sumbitButton.style.display = "none";
         nextquestionButton.style.display = "flex";
         nextquestionButton.style.visibility = "hidden";
+        cancelButton.style.visibility = "visible"
         displayPoints.textContent = "0";
         progressBarLoad.style.width = "0%";
         selectedAnswer = [];
         index = 0;
         questionIndex = 0;
         correctAnswer = 0;
-        categoryIndex = undefined;
+        categoryIndex = 0;
         points = 0;
         click = 0;
         isAnswered = false;
+        resultImage.innerHTML = "";
         resetFunction();
         optionReset();
     })
 
 // End of event listner....
+
+    function modeHandling() {
+        if(index < easyMode) {
+            modeDiv.textContent = "Easy";
+            modeDiv.style.background = "linear-gradient(135deg, #38fe10, #9af201, #efff0e)";
+        } else if(index < (easyMode + mediumMode)) {
+            modeDiv.textContent = "Medium";
+            modeDiv.style.background = "linear-gradient(135deg, rgb(255 52 0), rgb(242 148 1), rgb(251 255 0))";
+        } else if(index < quizData[categoryIndex].length) {
+            modeDiv.textContent = "Hard";
+            modeDiv.style.background = "linear-gradient(135deg, rgb(98 0 0), rgb(224 0 0), rgb(255 93 93))";
+        }
+        
+    }
 
     function answerMark() {
         answerButtonDiv.forEach(answer => {
@@ -587,7 +735,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer.firstElementChild.style.backgroundColor = "#fff174"
                 optionReset(this);
                 answerColor = "red";
-                optionVariable = this
+                optionVariable = this;
                 
                 nextquestionButton.style.visibility = "visible";
                 selectedAnswer[questionIndex] = this.lastElementChild.textContent;
@@ -665,6 +813,8 @@ document.addEventListener("DOMContentLoaded", function () {
         minute = 0;
         second = 0;
         timerText.textContent = "00:00";
+        modeDiv.textContent = "";
+        modeDiv.background = "";
     }
 
     function answerCheck() {
@@ -676,20 +826,32 @@ document.addEventListener("DOMContentLoaded", function () {
     
     function displayResult() {
         resultMarks.textContent = correctAnswer;
-        accuracy.textContent = `${correctAnswer * 10}%`;
+        totalMarks.textContent = lenghtFinder;
+        let accuracyRate = Math.floor(correctAnswer * (100/lenghtFinder));
+        accuracy.textContent = `${accuracyRate}%`;
         displayTime.textContent = `${m}:${s}`;
 
-        for(let resultIndex = 0; resultIndex <= quizData[categoryIndex].length; resultIndex++) {
-            if(correctAnswer === resultIndex) {
-                let resultImg = document.createElement("img");
-                resultImg.setAttribute("src", `quest-icon/result-${resultIndex}.png`);
-                resultImg.alt = "Result Image";
-                resultImage.appendChild(resultImg);
-                return;
-            }
-        }
+            let resultImg = document.createElement("img");
+            console.log("clicked");
+            console.log(quizData[categoryIndex].length);
+            if(accuracyRate === 0) {
+                resultImg.setAttribute("src", "quest-icon/result-0.png");
+            } else if(accuracyRate <= 25) {
+                resultImg.setAttribute("src", "quest-icon/result-quarter.png");
+            } else if(accuracyRate < 50) {
+                resultImg.setAttribute("src", "quest-icon/below-half.png");
+            } else if(accuracyRate === 50) {
+                resultImg.setAttribute("src", "quest-icon/result-5.png");
+            } else if(accuracyRate > 50 && accuracyRate < 75) {
+                resultImg.setAttribute("src", "quest-icon/above-half.png");
+            } else if(accuracyRate >= 75) {
+                resultImg.setAttribute("src", "quest-icon/below-goal.png");
+            } else if(accuracyRate === 100) {
+                resultImg.setAttribute("src", "quest-icon/reach-goal.png");
+            };
+            resultImg.alt = "Result Image";
+            resultImage.appendChild(resultImg);
+        
     }
 
-
-    
 });

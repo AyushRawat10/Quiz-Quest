@@ -513,11 +513,28 @@ html, body {
     border-radius: 10px;
 }
 
-.progress-bar > h4 {
-    text-align: center;
+.mode {
+    position: relative;
+    width: 10%;
+    padding: 5px 50px;
+    margin: auto;
+    border-radius: 999px;
     font-size: var(--font-sm);
-    color: var(--text-gray-color);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(135deg, #38fe10, #9af201, #efff0e);
+}
+
+.mode::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.05));
+    pointer-events: none;
 }
 
 #quiz > .quiz-inner-div > .head > .points-box {
@@ -779,17 +796,11 @@ html, body {
 .result-navbar > .left-nav-box {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
-.result-navbar > .left-nav-box > .back-svg-box {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #e9e9ea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.result-navbar > .left-nav-box > .back-svg-box > img {
+    width: 50px;
 }
 
 .left-nav-box > .result-nav-heading > h1 {
@@ -797,14 +808,47 @@ html, body {
     font-weight: 700;
 }
 
-.result-navbar > .right-nav-box > .share-svg {
-    width: 45px;
-    height: 45px; 
-    border-radius: 50%;
-    background-color: #e9e9ea;
+.result-navbar > .right-nav-box > .analysis-box {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.result-navbar > .right-nav-box > .analysis-box > button {
+    position: relative;
+    padding: 15px 50px;
+    font-size: var(--font-sm);
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #ffffff;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4b00ff, #7b3cff, #a855f7);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-navbar > .right-nav-box > .analysis-box > button::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.35),
+    rgba(255,255,255,0.05)
+  );
+  pointer-events: none;
+}
+
+.result-navbar > .right-nav-box > .analysis-box > button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(123, 60, 255, 0.8)
+                0 0 60px rgba(123, 60, 255, 0.6);
+}
+
+.result-navbar > .right-nav-box > .analysis-box > button:active {
+    transform: scale(1);
 }
 
 #result > .result-inner-div > .result-body {
@@ -1042,7 +1086,6 @@ html, body {
     .body > .question-box > .question > h1 {
         font-size: 25px;
     }
-    /* h=150, w=80, border-r=25, fs=30 */
 
     .body > .answer-box {
         width: 60%;
@@ -1106,15 +1149,12 @@ html, body {
 
     .progress-bar > .progress-bar-loader-box {
         height: var(--font-xs);
+        margin: 8px auto;
     }
 
     .progress-bar > .progress-bar-head-box > .level {
         font-size: 14px;
         font-weight: 600;
-    }
-
-    .progress-bar > h4 {
-        font-size: 14px;
     }
 
     #quiz > .quiz-inner-div > .head > .points-box {
@@ -1183,6 +1223,11 @@ html, body {
 
     .left-nav-box > .result-nav-heading > h1 {
         font-size: var(--font-md);
+    }
+
+    .result-navbar > .right-nav-box > .analysis-box > button {
+        padding: 8px 25px;
+        font-size: var(--font-xs);
     }
 
     #result > .result-inner-div > .result-body {
@@ -1414,6 +1459,11 @@ html, body {
 
     .progress-bar > .progress-bar-loader-box {
         height: 10px;
+        margin: 1px auto 6px;
+    }
+
+    .mode {
+        font-size: var(--font-xs);
     }
 
     #quiz > .quiz-inner-div > .head > .points-box {
@@ -1429,8 +1479,8 @@ html, body {
         font-size: 18px;
     }
 
-    .progress-bar > h4 {
-        font-size: var(--font-xs);
+    .result-content > .result-marks {
+        -webkit-text-stroke: 1px #fff;
     }
 
     .result-content > .result-stats {
@@ -1499,6 +1549,14 @@ html, body {
         font-size: 18px;
     }
 
+    .result-navbar > .left-nav-box {
+        gap: 5px;
+    }
+
+    .result-navbar > .left-nav-box > .back-svg-box > img {
+        width: 40px;
+    }
+
     #result > .result-inner-div > .result-body > .result-image > img {
         width: 200px;
     }
@@ -1506,6 +1564,10 @@ html, body {
     .result-content > .result-marks {
         font-size: 42px;
         height: 19%;
+    }
+
+    #result > .result-inner-div > .result-navbar {
+        padding: 10px 10px;
     }
 
     .result-content > .result-context > h1 {
@@ -1552,6 +1614,10 @@ html, body {
 
     #quiz > .quiz-inner-div > .head > .progress-bar {
         width: 80%;
+    }
+
+    .result-navbar > .right-nav-box > .analysis-box > button {
+        padding: 10px 10px;
     }
 
     .result-content > .result-stats > .stats-box {
