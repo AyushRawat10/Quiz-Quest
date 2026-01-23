@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let points = 0;
     let click = 0;
     let isAnswered = false;
+    let lockAnswer = false;
     let answerColor;
     let optionVariable;
     let lenghtFinder;
@@ -640,6 +641,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 progressBarLoad.style.width = `${(index + 1) * (100/lenghtFinder)}%`;
                 progressBarNumber.textContent = index + 1;
                 cancelButton.style.visibility = "hidden";
+                lockAnswer = true;
                 renderResult();
                 return;
             }
@@ -681,6 +683,7 @@ document.addEventListener("DOMContentLoaded", function () {
         points = 0;
         click = 0;
         isAnswered = false;
+        lockAnswer = false;
         resultImage.innerHTML = "";
         resetFunction();
         optionReset();
@@ -705,6 +708,7 @@ document.addEventListener("DOMContentLoaded", function () {
         points = 0;
         click = 0;
         isAnswered = false;
+        lockAnswer = false;
         resultImage.innerHTML = "";
         resetFunction();
         optionReset();
@@ -730,6 +734,8 @@ document.addEventListener("DOMContentLoaded", function () {
         answerButtonDiv.forEach(answer => {
             answer.addEventListener("click", function () {
                 
+                if(lockAnswer) return;
+
                 answer.style.backgroundColor = "#ffe600"
                 answer.style.boxShadow = "0 7px 0 #e1d400"
                 answer.firstElementChild.style.backgroundColor = "#fff174"
@@ -814,7 +820,7 @@ document.addEventListener("DOMContentLoaded", function () {
         second = 0;
         timerText.textContent = "00:00";
         modeDiv.textContent = "";
-        modeDiv.background = "";
+        modeDiv.style.background = "";
     }
 
     function answerCheck() {
@@ -832,7 +838,6 @@ document.addEventListener("DOMContentLoaded", function () {
         displayTime.textContent = `${m}:${s}`;
 
             let resultImg = document.createElement("img");
-            console.log("clicked");
             console.log(quizData[categoryIndex].length);
             if(accuracyRate === 0) {
                 resultImg.setAttribute("src", "quest-icon/result-0.png");
