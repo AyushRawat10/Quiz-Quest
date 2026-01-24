@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const homeButton = document.querySelector(".home");
     const resultImage = document.querySelector(".result-image");
     const modeDiv = document.querySelector(".mode");
+    const analysisBtn = document.querySelector(".analysis-box button");
+    const analysisDiv = document.querySelector(".analysis-overlay");
+    const cancelAnalysis = document.querySelector(".cross-bg");
+    const analysisBody = document.querySelector(".analytical-body");
+
 
     let selectedAnswer = [];
     let index = 0;
@@ -578,6 +583,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultDiv.style.display = "initial";
                 answerCheck();
                 displayResult();
+                analysisHandling();
                 resetFunction();
                 correctAnswer = 0;
             }
@@ -685,6 +691,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isAnswered = false;
         lockAnswer = false;
         resultImage.innerHTML = "";
+        analysisBody.innerHTML = "";
         resetFunction();
         optionReset();
     })
@@ -710,9 +717,20 @@ document.addEventListener("DOMContentLoaded", function () {
         isAnswered = false;
         lockAnswer = false;
         resultImage.innerHTML = "";
+        analysisBody.innerHTML = "";
         resetFunction();
         optionReset();
     })
+
+    analysisBtn.addEventListener("click", function() {
+        analysisDiv.style.display = "initial";
+        resultDiv.style.filter = "blur(5px)";
+    })
+
+    cancelAnalysis.onclick = function() {
+        analysisDiv.style.display = "none";
+        resultDiv.style.filter = "none";
+    }
 
 // End of event listner....
 
@@ -857,6 +875,38 @@ document.addEventListener("DOMContentLoaded", function () {
             resultImg.alt = "Result Image";
             resultImage.appendChild(resultImg);
         
+    }
+
+    function analysisHandling() {
+        for(let i = 0; i < quizData[categoryIndex].length; i++) {
+            const quizAnalysisBox = document.createElement("div");
+            const questionAnalysis = document.createElement("div");
+            const answerAnalysis = document.createElement("div");
+            const correctAnswer = document.createElement("div");
+            const userAnswer = document.createElement("div");
+
+            quizAnalysisBox.classList.add("quiz-analysis-box");
+            questionAnalysis.classList.add("question-anlalysis");
+            answerAnalysis.classList.add("answer-analysis");
+            correctAnswer.classList.add("correct-answer");
+            userAnswer.classList.add("user-answer");
+
+            if(quizData[categoryIndex][i].answer === selectedAnswer[i]) {
+                userAnswer.style.background = "linear-gradient(180deg, #ffffffc2, #46de48a1)";
+            } else {
+                userAnswer.style.background = "linear-gradient(180deg, #ffffffc2, #de4646a1)";
+            }
+
+            questionAnalysis.innerHTML = `<h3>${quizData[categoryIndex][i].question + " " + quizData[categoryIndex][i].keynote}</h3>`
+            correctAnswer.innerHTML = `<h4>${quizData[categoryIndex][i].answer}</h4>`;
+            userAnswer.innerHTML = `<h4>${selectedAnswer[i]}</h4>`
+
+            answerAnalysis.appendChild(correctAnswer);
+            answerAnalysis.appendChild(userAnswer);
+            quizAnalysisBox.appendChild(questionAnalysis);
+            quizAnalysisBox.appendChild(answerAnalysis);
+            analysisBody.appendChild(quizAnalysisBox);
+        }
     }
 
 });
