@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const bodyDiv = document.querySelector("#body");
     const playButton = document.querySelector(".play-button");
+    const featureContainer = document.querySelectorAll(".feature-container");
     const mainDiv = document.querySelector("#main");
+    const navContentAll = document.querySelectorAll(".nav-content-all");
     const selectQuizCategory = document.querySelectorAll(".select-content");
     const quizDiv = document.querySelector("#quiz");
     const nextquestionButton = document.querySelector(".next-btn");
@@ -29,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const analysisDiv = document.querySelector(".analysis-overlay");
     const cancelAnalysis = document.querySelector(".cross-bg");
     const analysisBody = document.querySelector(".analytical-body");
+    const notificationDisplay = document.querySelector("#notification");
 
 
     let selectedAnswer = [];
@@ -65,280 +68,382 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Milky Way"
             },
             {
+                question: "What gives light to the Earth during the",
+                keynote: "Day ?",
+                option: ["Moon", "Stars", "Sun", "Jupiter"],
+                answer: "Sun"
+            },
+            {
+                question: "Which celestial body orbits the",
+                keynote: "Earth ?",
+                option: ["Sun", "Mars", "Moon", "Venus"],
+                answer: "Moon"
+            },
+            {
                 question: "Which planet has the most",
                 keynote: "Moons ?",
-                option: ["Earth", "Mars", "Jupiter", "Saturn"],
-                answer: "Saturn"
-            },
-            {
-                question: "What is the outermost layer of the",
-                keynote: "Sun called?",
-                option: ["Core", "Photosphere", "Chromosphere", "Corona"],
-                answer: "Corona"
-            },
-            {
-                question: "Which planet is famous for its",
-                keynote: "Rings ?",
                 option: ["Uranus", "Neptune", "Jupiter", "Saturn"],
                 answer: "Saturn"
             },
             {
-                question: "What do we call a rock that enters",
-                keynote: "Earth's Atmosphere ?",
-                option: ["Asteroid", "Comet", "Meteor", "Moon"],
-                answer: "Meteor"
-            },
-            {
-                question: "Which planet is the hottest in our",
-                keynote: "Solar System ?",
-                option: ["Mercury", "Mars", "Venus", "Jupiter"],
-                answer: "Venus"
-            },
-            {
                 question: "What force keeps planets in orbit around the",
                 keynote: "Sun ?",
-                option: ["Magnestism", "Energy", "Gravity", "Speed"],
+                option: ["Magnetism", "Gravity", "Energy", "Motion"],
                 answer: "Gravity"
             },
             {
-                question: "How long does Earth take to orbit the",
+                question: "Which layer of the Sun is visible from",
+                keynote: "Earth ?",
+                option: ["Photosphere", "Core", "Corona", "Chromosphere"],
+                answer: "Photosphere"
+            },
+            {
+                question: "What is the name of a rocky object that enters",
+                keynote: "Earth's Atmosphere ?",
+                option: ["Asteroid", "Comet", "Satellite", "Meteor"],
+                answer: "Meteor"
+            },
+            {
+                question: "Which planet is the hottest in the",
+                keynote: "Solar System?",
+                option: ["Mercury", "Venus", "Mars", "Jupiter"],
+                answer: "Venus"
+            },
+            {
+                question: "How long does Earth take to complete one orbit around the",
                 keynote: "Sun ?",
                 option: ["24 hours", "30 days", "365 days", "500 days"],
                 answer: "365 days"
             },
             {
-                question: "Which planet is known as the",
-                keynote: "Gas Giant ?",
-                option: ["Mars", "Earth", "Jupiter", "Mercury"],
-                answer: "Jupiter"
+                question: "What type of galaxy is the",
+                keynote: "Milky Way ?",
+                option: ["Elliptical", "Irregular", "Spiral", "Ring"],
+                answer: "Spiral"
             },
             {
-                question: "Question",
-                keynote: "11",
-                option: ["1", "2", "3", "4"],
-                answer: "2"
+                question: "What is the boundary around a black hole",
+                keynote: "Called ?",
+                option: ["Event Horizon", "Singularity", "Accretion Disk", "Photon Sphere"],
+                answer: "Event Horizon"
             },
             {
-                question: "Question",
-                keynote: "12",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "Which planet has the strongest winds in the",
+                keynote: "Solar System ?",
+                option: ["Jupiter", "Saturn", "Uranus", "Neptune"],
+                answer: "Neptune"
+            },
+            {
+                question: "What is the name of the first artificial satellite launched into",
+                keynote: "Space ?",
+                option: ["Voyager 1", "Apollo 11", "Sputnik 1", "Explorer 1"],
+                answer: "Sputnik 1"
+            },
+            {
+                question: "Which element fuels nuclear fusion in",
+                keynote: "Stars ?",
+                option: ["Oxygen", "Helium", "Hydrogen", "Carbon"],
+                answer: "Hydrogen"
             }
         ],
         [
             {
                 question: "Which animal is known as the King of the",
-                keynote: "Jungle?",
+                keynote: "Jungle ?",
                 option: ["Tiger", "Lion", "Leopard", "Elephant"],
                 answer: "Lion"
             },
             {
-                question: "Which animal is the",
-                keynote: "largest mammal?",
+                question: "Which animal is the largest",
+                keynote: "Mammal ?",
                 option: ["Elephant", "Giraffe", "Whale", "Rhino"],
                 answer: "Whale"
             },
             {
-                question: "Which animal can change its",
-                keynote: "color?",
-                option: ["Chameleon", "Frog", "Lizard", "Snake"],
-                answer: "Chameleon"
+                question: "Which animal gives us",
+                keynote: "Milk ?",
+                option: ["Dog", "Horse", "Goat", "Cow"],
+                answer: "Cow"
             },
             {
-                question: "Which animal is called the",
-                keynote: "“Ship of the Desert”?",
-                option: ["Horse", "Scorpions", "Snake", "Camel"],
-                answer: "Camel"
+                question: "Which animal is famous for its",
+                keynote: "Long Neck ?",
+                option: ["Deer", "Camel", "Giraffe", "Horse"],
+                answer: "Giraffe"
             },
             {
                 question: "Which bird cannot",
-                keynote: "fly?",
+                keynote: "Fly ?",
                 option: ["Eagle", "Sparrow", "Ostrich", "Parrot"],
                 answer: "Ostrich"
             },
             {
-                question: "Which animal is famous for its",
-                keynote: "black and white stripes?",
+                question: "Which animal is famous for its black and white",
+                keynote: "Stripes?",
                 option: ["Zebra", "Horse", "Cow", "Tiger"],
                 answer: "Zebra"
             },
             {
                 question: "Which animal is the",
-                keynote: "fastest on land?",
+                keynote: "Fastest on land?",
                 option: ["Lion", "Horse", "Cheetah", "Leopard"],
                 answer: "Cheetah"
             },
             {
                 question: "Which animal sleeps",
-                keynote: "standing up?",
+                keynote: "Standing up?",
                 option: ["Camel", "Donkey", "Yak", "Horse"],
                 answer: "Horse"
-            }
-            // {
-            //     question: "Which animal is known for its",
-            //     keynote: "long neck?",
-            //     option: ["Deer", "Giraffe", "Camel", "Horse"],
-            //     answer: "Giraffe"
-            // },
-            // {
-            //     question: "Which animal is called man's",
-            //     keynote: "best friend?",
-            //     option: ["Dog", "Horse", "Cat", "Rabbit"],
-            //     answer: "Dog"
-            // }
+            },
+            {
+                question: "Which animal is known as the",
+                keynote: "Ship of the Desert ?",
+                option: ["Horse", "Camel", "Donkey", "Ox"],
+                answer: "Camel"
+            },
+            {
+                question: "Which animal can change its",
+                keynote: "Color ?",
+                option: ["Chameleon", "Frog", "Snake", "Lizard"],
+                answer: "Chameleon"
+            },
+            {
+                question: "Which animal is known for",
+                keynote: "Building dams ?",
+                option: ["Otter", "Beaver", "Mole", "Badger"],
+                answer: "Beaver"
+            },
+            {
+                question: "Which animal has the strongest",
+                keynote: "Bite force ?",
+                option: ["Shark", "Lion", "Tiger", "Crocodile"],
+                answer: "Crocodile"
+            },
+            {
+                question: "Which animal is known for its",
+                keynote: "Pouch ?",
+                option: ["Kangaroo", "Bear", "Monkey", "Deer"],
+                answer: "Kangaroo"
+            },
+            {
+                question: "Which animal is mostly active at",
+                keynote: "Night ?",
+                option: ["Cow", "Dog", "Owl", "Horse"],
+                answer: "Owl"
+            },
+            {
+                question: "Which animal uses",
+                keynote: "Echolocation ?",
+                option: ["Dolphin", "Shark", "Whale", "Seal"],
+                answer: "Dolphin"
+            },
+            {
+                question: "Which animal has the longest",
+                keynote: "Lifespan ?",
+                option: ["Elephant", "Parrot", "Whale", "Tortoise"],
+                answer: "Tortoise"
+            },
+            {
+                question: "What is the scientific name of the",
+                keynote: "House cat ?",
+                option: ["Felis leo", "Felis catus", "Panthera leo", "Canis lupus"],
+                answer: "Felis catus"
+            },
+            {
+                question: "Which animal has three",
+                keynote: "Hearts ?",
+                option: ["Shark", "Crocodile", "Whale", "Octopus"],
+                answer: "Octopus"
+            },
+            {
+                question: "Which mammal can",
+                keynote: "Fly ?",
+                option: ["Flying squirrel", "Bat", "Eagle", "Penguin"],
+                answer: "Bat"
+            },
+            {
+                question: "Which animal has the largest brain relative to",
+                keynote: "Body size ?",
+                option: ["Human", "Elephant", "Dolphin", "Chimpanzee"],
+                answer: "Dolphin"
+            },
         ],
         [
             {
-                question: "What part of the plant makes",
-                keynote: "Food?",
-                option: ["Root", "Stem", "Flower", "Leaf"],
-                answer: "Leaf"
-            },
-            {
                 question: "Which organ pumps blood in the",
-                keynote: "Body?",
-                option: ["Brain", "Heart", "Lung", "Liver"],
+                keynote: "Human body ?",
+                option: ["Brain", "Heart", "Lungs", "Liver"],
                 answer: "Heart"
             },
             {
-                question: "What do bees collect from",
-                keynote: "Flowers?",
-                option: ["Nectar", "Water", "Pollen", "Honey"],
-                answer: "Nectar"
+                question: "What gas do plants use for",
+                keynote: "Photosynthesis ?",
+                option: ["Nitrogen", "Oxygen", "Hydrogen", "Carbon dioxide"],
+                answer: "Carbon dioxide"
             },
             {
-                question: "What is the boiling point of",
-                keynote: "Water?",
-                option: ["Fifty", "Ninety", "Hundred", "Eighty"],
-                answer: "Hundred"
-            },
-            {
-                question: "Which vitamin comes from",
-                keynote: "Sunlight?",
-                option: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+                question: "Which vitamin is produced in the human body by",
+                keynote: "Sunlight ?",
+                option: ["Vitamin D", "Vitamin B", "Vitamin A", "Vitamin C"],
                 answer: "Vitamin D"
             },
             {
-                question: "Which part helps humans",
-                keynote: "Breathe?",
-                option: ["Stomach", "Lungs", "Liver", "Brain"],
-                answer: "Lungs"
+                question: "What do bees collect from",
+                keynote: "Flowers ?",
+                option: ["Honey", "Water", "Seeds", "Nectar"],
+                answer: "Nectar"
             },
             {
-                question: "Which animal is an",
-                keynote: '"Amphibian" ?',
-                option: ["Crocodile", "Snake", "Duck", "Frog"],
-                answer: "Frog"
+                question: "What is the boiling point of water at",
+                keynote: "Sea level ?",
+                option: ["90°C", "100°C", "80°C", "120°C"],
+                answer: "100°C"
             },
             {
-                question: "What is the hardest natural",
-                keynote: "Substance ?",
-                option: ["Gold", "Diamond", "Iron", "Silver"],
-                answer: "Diamond"
+                question: "Which blood cells help fight",
+                keynote: "Infections ?",
+                option: ["White blood cells", "Red blood cells", "Platelets", "Plasma"],
+                answer: "White blood cells"
             },
             {
-                question: "What carries blood in the",
-                keynote: "Body ?",
-                option: ["Veins", "Bones", "Nerves", "Muscles"],
-                answer: "Veins"
+                question: "Which part of the plant transports water from roots to",
+                keynote: 'Leaves ?',
+                option: ["Phloem", "Cortex", "Xylem", "Stem"],
+                answer: "Xylem"
             },
             {
                 question: "Which metal is liquid at",
-                keynote: '"Room Temperature" ?',
-                option: ["Iron", "Copper", "Mercury", "Zinc"],
+                keynote: "Room temperature ?",
+                option: ["Iron", "Diamond", "Mercury", "Silver"],
                 answer: "Mercury"
             },
             {
-                question: "Question",
-                keynote: "11",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "What type of energy is stored in",
+                keynote: "Food ?",
+                option: ["Heat energy", "Chemical energy", "Electrical energy", "Kinetic energy"],
+                answer: "Chemical energy"
             },
             {
-                question: "Question",
-                keynote: "12",
-                option: ["1", "2", "3", "4"],
-                answer: "2"
+                question: "Which organ is responsible for filtering blood in",
+                keynote: 'Humans ?',
+                option: ["Heart", "Liver", "Lungs", "Kidney"],
+                answer: "Kidney"
             },
             {
-                question: "Question",
-                keynote: "13",
-                option: ["1", "2", "3", "4"],
-                answer: "3"
+                question: "Which acid is present in the human",
+                keynote: "Stomach ?",
+                option: ["Sulfuric acid", "Nitric acid", "Hydrochloric acid", "Acetic acid"],
+                answer: "Hydrochloric acid"
             },
             {
-                question: "Question",
-                keynote: "14",
-                option: ["1", "2", "3", "4"],
-                answer: "4"
+                question: "Which substance conducts electricity",
+                keynote: "Best ?",
+                option: ["Copper", "Glass", "Rubber", "Plastic"],
+                answer: "Copper"
             },
             {
-                question: "Question",
-                keynote: "15",
-                option: ["1", "2", "3", "4"],
-                answer: "4"
+                question: "What is the chemical symbol of",
+                keynote: "Potassium ?",
+                option: ["P", "Po", "K", "Pt"],
+                answer: "K"
             },
+            {
+                question: "Which part of the brain controls",
+                keynote: "Balance and Coordination ?",
+                option: ["Cerebrum", "Medulla", "Hypothalamus", "Cerebellum"],
+                answer: "Cerebellum"
+            },
+            {
+                question: "Which gas is released during respiration in",
+                keynote: "Humans ?",
+                option: ["Oxygen", "Carbon dioxide", "Hydrogen", "Nitrogen"],
+                answer: "Carbon dioxide"
+            },
+            {
+                question: "What is the pH value of pure",
+                keynote: "Water ?",
+                option: ["5", "6", "8", "7"],
+                answer: "7"
+            },
+            {
+                question: "Which enzyme is responsible for breaking down starch into sugars in the",
+                keynote: "Human mouth?",
+                option: ["Amylase", "Lipase", "Pepsin", "Trypsin"],
+                answer: "Amylase"
+            }
         ],
         [
             {
-                question: "Which fruit is known for",
-                keynote: '"Potassium ?"',
-                option: ["Apple", "Banana", "Orange", "Grape"],
-                answer: "Banana"
+                question: "Which nutrient is the main source of energy for the",
+                keynote: "Human body ?",
+                option: ["Protein", "Carbohydrate", "Fat", "Vitamin"],
+                answer: "Carbohydrate"
             },
             {
-                question: "Which food is made from",
-                keynote: "Milk ?",
-                option: ["Bread", "Rice", "Cheese", "Wheat"],
+                question: "Which vitamin is most commonly found in",
+                keynote: "Citrus fruits ?",
+                option: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
+                answer: "Vitamin C"
+            },
+            {
+                question: "Which food product is made by",
+                keynote: "Fermenting milk ?",
+                option: ["Butter", "Cheese", "Ice cream", "Cream"],
                 answer: "Cheese"
             },
             {
-                question: "Which vegetable is orange in",
-                keynote: "Color ?",
-                option: ["Spinach", "Orange", "Cabbage", "Carrot"],
-                answer: "Carrot"
+                question: "Which mineral is essential for healthy",
+                keynote: "Bones and Teeth ?",
+                option: ["Iron", "Sodium", "Potassium", "Calcium"],
+                answer: "Calcium"
             },
             {
-                question: "Which food gives instant",
-                keynote: "Energy ?",
-                option: ["Sugar", "Rice", "Potato", "Bread"],
-                answer: "Sugar"
+                question: "Which cooking method uses steam to",
+                keynote: "Cook food ?",
+                option: ["Frying", "Roasting", "Boiling", "Steaming"],
+                answer: "Steaming"
             },
             {
-                question: "Which drink is made from",
-                keynote: "Cocoa ?",
-                option: ["Tea", "Coffee", "Chocolate", "Juice"],
-                answer: "Chocolate"
+                question: "Which vitamin helps in blood",
+                keynote: "Clotting ?",
+                option: ["Vitamin A", "Vitamin C", "Vitamin K", "Vitamin D"],
+                answer: "Vitamin K"
             },
             {
-                question: "Which grain is used to make",
-                keynote: "Bread ?",
-                option: ["Rice", "Wheat", "Maize", "Oats"],
+                question: "What type of fat is commonly found in",
+                keynote: "Olive oil ?",
+                option: ["Saturated", "Trans", "Monounsaturated", "Polyunsaturated"],
+                answer: "Monounsaturated"
+            },
+            {
+                question: "Which grain is traditionally used to make",
+                keynote: "Pasta ?",
+                option: ["Wheat", "Rice", "Barley", "Oats"],
                 answer: "Wheat"
             },
             {
-                question: "Which vegetable is used to make",
-                keynote: "Salad ?",
-                option: ["Potato", "Onion", "Lettuce", "Pumpkin"],
-                answer: "Lettuce"
+                question: "Which food is considered a complete",
+                keynote: "Protein ?",
+                option: ["Rice", "Beans", "Corn", "Egg"],
+                answer: "Egg"
             },
             {
-                question: "Which fruit has seeds on the",
-                keynote: "Outside ?",
-                option: ["Strawberry", "Mango", "Apple", "Orange"],
-                answer: "Strawberry"
+                question: "Which vitamin deficiency causes",
+                keynote: "Scurvy ?",
+                option: ["Vitamin C", "Vitamin D", "Vitamin A", "Vitamin B1"],
+                answer: "Vitamin C"
             },
             {
-                question: "Which food is cooked by",
-                keynote: "Boiling ?",
-                option: ["Rice", "Bread", "Biscuit", "Cake"],
-                answer: "Rice"
+                question: "Which enzyme is primarily responsible for protein digestion in the",
+                keynote: "Stomach ?",
+                option: ["Amylase", "Pepsin", "Lipase", "Trypsin"],
+                answer: "Pepsin"
             },
             {
-                question: "Which food is made by",
-                keynote: "Bees ?",
-                option: ["Jam", "Honey", "Sugar", "Syrup"],
-                answer: "Honey"
+                question: "Which mineral is a key component of hemoglobin and helps in",
+                keynote: "Oxygen transport ?",
+                option: ["Calcium", "Zinc", "Magnesium", "Iron"],
+                answer: "Iron"
             }
         ],
         [
@@ -349,59 +454,89 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Airplane"
             },
             {
-                question: "Which sea separates",
-                keynote: "Europe and Africa?",
-                option: ["Red", "Black", "Mediterranean", "Arabian"],
-                answer: "Mediterranean"
-            },
-            {
-                question: "Which place do airplanes",
-                keynote: "Land ?",
-                option: ["Station", "Port", "Garage", "None"],
-                answer: "None"
-            },
-            {
-                question: "Which bag is used while",
-                keynote: "Traveling ?",
-                option: ["Purse", "Backpack", "Wallet", "Pouch"],
-                answer: "Backpack"
-            },
-            {
-                question: "Which tool shows",
-                keynote: "Directions ?",
-                option: ["Compass", "Watch", "Calendar", "Mirror"],
-                answer: "Compass"
+                question: "Which travel document is required for",
+                keynote: "International travel ?",
+                option: ["License", "Passport", "Ticket", "Identity card"],
+                answer: "Passport"
             },
             {
                 question: "Which continent has the most",
                 keynote: "Countries ?",
                 option: ["Asia", "Europe", "America", "Africa"],
                 answer: "Africa"
+            },
+            {
+                question: "Which tool is used to find directions while",
+                keynote: "Traveling ?",
+                option: ["Compass", "Watch", "Calendar", "Mirror"],
+                answer: "Compass"
+            },
+            {
+                question: "Which city is known as the",
+                keynote: "“City of Canals” ?",
+                option: ["Paris", "Amsterdam", "Venice", "Rome"],
+                answer: "Venice"
+            },
+            {
+                question: "Which mountain range separates",
+                keynote: "Europe and Asia ?",
+                option: ["Alps", "Andes", "Ural", "Rockies"],
+                answer: "Ural"
+            },
+            {
+                question: "Which sea separates",
+                keynote: "Europe from Africa ?",
+                option: ["Black Sea", "Red Sea", "Arabian Sea", "Mediterranean Sea"],
+                answer: "Mediterranean Sea"
+            },
+            {
+                question: "Which country uses the currency",
+                keynote: "“Yen” ?",
+                option: ["China", "Japan", "Korea", "Thailand"],
+                answer: "Japan"
+            },
+            {
+                question: "Which country uses the currency",
+                keynote: '"Forint" ?',
+                option: ["Poland", "Hungary", "Romania", "Czechia"],
+                answer: "Hungary"
+            },
+            {
+                question: "Which desert is the largest hot desert in the",
+                keynote: "World ?",
+                option: ["Sahara", "Kalahari", "Gobi", "Thar"],
+                answer: "Sahara"
+            },
+            {
+                question: "Which ocean is the deepest in the",
+                keynote: "World ?",
+                option: ["Atlantic", "Indian", "Arctic", "Pacific"],
+                answer: "Pacific"
+            },
+            {
+                question: "WWhich country has the highest number of UNESCO",
+                keynote: "World Heritage Sites ?",
+                option: ["China", "Spain", "Italy", "India"],
+                answer: "Italy"
+            },
+            {
+                question: "Which country has the longest coastline in the",
+                keynote: "World ?",
+                option: ["Australia", "Russia", "Canada", "Indonesia"],
+                answer: "Canada"
+            },
+            {
+                question: "Which country completely surrounds",
+                keynote: "Another country ?",
+                option: ["Italy", "South Africa", "Spain", "Switzerland"],
+                answer: "South Africa"
+            },
+            {
+                question: "Which city is located on",
+                keynote: "Two continents ?",
+                option: ["Istanbul", "Athens", "Moscow", "Cairo"],
+                answer: "Istanbul"
             }
-            // {
-            //     question: "Which place do travelers stay",
-            //     keynote: "Overnight?",
-            //     option: ["Office", "Restaurent", "Market", "Hotel"],
-            //     answer: "Hotel"
-            // },
-            // {
-            //     question: "Which country uses the currency",
-            //     keynote: '"Forint" ?',
-            //     option: ["Poland", "Hungary", "Romania", "Czechia"],
-            //     answer: "Hungary"
-            // },
-            // {
-            //     question: "Which travel item shows",
-            //     keynote: "Time ?",
-            //     option: ["Map", "Clock", "Watch", "Compass"],
-            //     answer: "Watch"
-            // },
-            // {
-            //     question: "Which place is visited by",
-            //     keynote: "Tourists ?",
-            //     option: ["Radio", "GPS", "Camera", "Charger"],
-            //     answer: "GPS"
-            // }
         ],
         [
             {
@@ -411,130 +546,130 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Piano"
             },
             {
-                question: "Which composer became",
-                keynote: "Deaf ?",
-                option: ["Mozart", "Bach", "Chopin", "Beethoven"],
-                answer: "Beethoven"
-            },
-            {
-                question: "Which scale has five",
-                keynote: "Notes ?",
-                option: ["Major", "Minor", "Pentatonic", "Chromatic"],
-                answer: "Pentatonic"
-            },
-            {
-                question: "Which instrument uses",
-                keynote: "Strings ?",
-                option: ["Drum", "Flute", "Guitar", "Trumpet"],
-                answer: "Guitar"
-            },
-            {
-                question: "Which clef is also called the",
-                keynote: "Gclef ?",
-                option: ["Bass", "Alto", "Tenor", "Treble"],
-                answer: "Treble"
-            },
-            {
-                question: "Who sings",
+                question: "Who performs",
                 keynote: "Songs ?",
                 option: ["Dancer", "Singer", "Actor", "Composer"],
                 answer: "Singer"
             },
             {
-                question: "Which music style is",
-                keynote: "Energetic and Electronic ?",
-                option: ["Jazz", "Rock", "EDM", "Classical"],
-                answer: "EDM"
+                question: "Which instrument belongs to the",
+                keynote: "String family ?",
+                option: ["Flute", "Drum", "Guitar", "Trumpet"],
+                answer: "Guitar"
             },
             {
-                question: "Which object is used to hear",
-                keynote: "Music ?",
-                option: ["Speaker", "Camera", "Monitor", "Keyboard"],
-                answer: "Speaker"
+                question: "Which term defines the",
+                keynote: "Speed of music ?",
+                option: ["Pitch", "Tempo", "Scale", "Dynamics"],
+                answer: "Tempo"
             },
             {
-                question: "Which instrument family is the",
-                keynote: "Violin ?",
+                question: "Which family does the",
+                keynote: "Violin belong to ?",
                 option: ["Brass", "Woodwind", "Percussion", "Strings"],
                 answer: "Strings"
             },
             {
-                question: "Which tempo marking means",
-                keynote: "Fast ?",
-                option: ["Largo", "Allegro", "Adagio", "Lento"],
-                answer: "Allegro"
+                question: "Which clef is also known as",
+                keynote: "G clef ?",
+                option: ["Bass", "Alto", "Treble", "Tenor"],
+                answer: "Treble"
             },
             {
-                question: "Question",
-                keynote: "11",
-                option: ["1", "2", "3", "4"],
-                answer: "2"
+                question: "How many notes are there in a",
+                keynote: "Standard scale ?",
+                option: ["Five", "Six", "Seven", "Eight"],
+                answer: "Seven"
             },
             {
-                question: "Question",
-                keynote: "12",
-                option: ["1", "2", "3", "4"],
-                answer: "2"
+                question: "Which music genre is",
+                keynote: "Electronic and dance-based ?",
+                option: ["Jazz", "Rock", "EDM", "Classical"],
+                answer: "EDM"
             },
             {
-                question: "Question",
-                keynote: "13",
-                option: ["1", "2", "3", "4"],
-                answer: "2"
+                question: "Which instrument is mainly used to",
+                keynote: "Keep rhythm ?",
+                option: ["Violin", "Piano", "Drum", "Flute"],
+                answer: "Drum"
             },
             {
-                question: "Question",
-                keynote: "14",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "What does the term",
+                keynote: "Allegro indicate ?",
+                option: ["Slow", "Medium", "Fast", "Very slow"],
+                answer: "Fast"
             },
             {
-                question: "Question",
-                keynote: "15",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "Which instrument family produces sound by",
+                keynote: "Blowing air ?",
+                option: ["Strings", "Brass", "Percussion", "Keyboard"],
+                answer: "Brass"
             },
             {
-                question: "Question",
-                keynote: "16",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "Which note duration is the",
+                keynote: "Longest ?",
+                option: ["Quarter", "Half", "Whole", "Eighth"],
+                answer: "Whole"
             },
             {
-                question: "Question",
-                keynote: "17",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "Which instrument does NOT",
+                keynote: "Use a bow ?",
+                option: ["Violin", "Cello", "Guitar", "Viola"],
+                answer: "Guitar"
             },
             {
-                question: "Question",
-                keynote: "18",
-                option: ["1", "2", "3", "4"],
-                answer: "1"
+                question: "Which musical term refers to",
+                keynote: "Loudness ?",
+                option: ["Pitch", "Tempo", "Dynamics", "Scale"],
+                answer: "Dynamics"
             },
             {
-                question: "Question",
-                keynote: "19",
-                option: ["1", "2", "3", "4"],
-                answer: "3"
+                question: "Which scale uses",
+                keynote: "Five notes ?",
+                option: ["Major", "Minor", "Pentatonic", "Chromatic"],
+                answer: "Pentatonic"
             },
             {
-                question: "Question",
-                keynote: "20",
-                option: ["1", "2", "3", "4"],
-                answer: "3"
+                question: "Which device converts electrical signals",
+                keynote: "Into sound ?",
+                option: ["Microphone", "Speaker", "Amplifier", "Mixer"],
+                answer: "Speaker"
             },
             {
-                question: "Question",
-                keynote: "21",
-                option: ["1", "2", "3", "4"],
-                answer: "3"
+                question: "Which composer became",
+                keynote: "Deaf later in life ?",
+                option: ["Mozart", "Bach", "Chopin", "Beethoven"],
+                answer: "Beethoven"
             },
             {
-                question: "Question",
-                keynote: "22",
-                option: ["1", "2", "3", "4"],
-                answer: "3"
+                question: "What term means gradual increase in",
+                keynote: "Volume ?",
+                option: ["Diminuendo", "Crescendo", "Staccato", "Legato"],
+                answer: "Crescendo"
+            },
+            {
+                question: "What is the standard",
+                keynote: "Concert pitch ?",
+                option: ["A 432 Hz", "A 440 Hz", "C 256 Hz", "G 392 Hz"],
+                answer: "A 440 Hz"
+            },
+            {
+                question: "Which instrument is classified as both",
+                keynote: "String and percussion ?",
+                option: ["Piano", "Harp", "Guitar", "Violin"],
+                answer: "Piano"
+            },
+            {
+                question: "Which musical term means playing",
+                keynote: "Notes smoothly connected ?",
+                option: ["Staccato", "Legato", "Accent", "Fermata"],
+                answer: "Legato"
+            },
+            {
+                question: "Which Indian classical system is based on",
+                keynote: "Ragas ?",
+                option: ["Carnatic", "Western", "Jazz", "Blues"],
+                answer: "Carnatic"
             }
         ]
     ]
@@ -601,13 +736,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
   
+    // Add Event Listner....
+
+    featureContainer.forEach((feature) => {
+        feature.addEventListener("click", showNotification);
+    });
 
     playButton.addEventListener("click", () => {
         mainDiv.style.display = "initial";
         bodyDiv.style.display = "none";
+        navContentAll.forEach((content) => {
+            if(content.classList.contains("nav-content-quest")) {
+                content.classList.add("nav-active");
+                content.lastElementChild.style.color = "white";
+            } 
+
+            content.addEventListener("click", () => {
+                if (content.classList.contains("nav-content-home")) {
+                    mainDiv.style.display = "none";
+                    bodyDiv.style.display = "initial";
+                    return;
+                }
+
+                if (!content.classList.contains("nav-content-quest")) {
+                    showNotification();
+                }
+            })
+        })
     });
 
-// Add Event Listner....
     selectQuizCategory.forEach((eachCategory) => {
         eachCategory.addEventListener("click", function() {
             if (this.classList.contains("space")) {
@@ -907,6 +1064,14 @@ document.addEventListener("DOMContentLoaded", function () {
             quizAnalysisBox.appendChild(answerAnalysis);
             analysisBody.appendChild(quizAnalysisBox);
         }
+    }
+
+    function showNotification() {
+        notificationDisplay.style.display = "flex";
+
+        setTimeout(() => {
+            notificationDisplay.style.display = "none";
+        }, 3000)
     }
 
 });
