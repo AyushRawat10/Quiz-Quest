@@ -1617,12 +1617,21 @@ html, body {
         padding: 10px 40px;
     }
 
+    .nav {
+        padding: 5px 10px;
+    }
+
+    .nav > .nav-content {
+        gap: 5px;
+    }
+
     .nav > .nav-content > .nav-content-all {
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         padding: 0;
         width: 90px;
-        height: 49px;
+        height: 55px;
         gap: 0;
     } 
 

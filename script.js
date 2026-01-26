@@ -514,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Pacific"
             },
             {
-                question: "WWhich country has the highest number of UNESCO",
+                question: "Which country has the highest number of UNESCO",
                 keynote: "World Heritage Sites ?",
                 option: ["China", "Spain", "Italy", "India"],
                 answer: "Italy"
