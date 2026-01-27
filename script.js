@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 question: "Which animal gives us",
                 keynote: "Milk ?",
-                option: ["Dog", "Horse", "Goat", "Cow"],
+                option: ["Dog", "Horse", "Rhino", "Cow"],
                 answer: "Cow"
             },
             {
