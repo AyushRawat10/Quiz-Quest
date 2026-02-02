@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const playAgainBtn = document.querySelector(".play-again");
     const homeButton = document.querySelector(".home");
     const resultImage = document.querySelector(".result-image");
+    const resultContentTitle = document.querySelector(".result-context");
+    const resultContent = document.querySelector(".result-context h3");
     const modeDiv = document.querySelector(".mode");
     const analysisBtn = document.querySelector(".analysis-box button");
     const analysisDiv = document.querySelector(".analysis-overlay");
@@ -300,10 +302,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "100°C"
             },
             {
-                question: "Which blood cells help fight",
-                keynote: "Infections ?",
-                option: ["White blood cells", "Red blood cells", "Platelets", "Plasma"],
-                answer: "White blood cells"
+                question: "Which organ controls",
+                keynote: "Body temperature ?",
+                option: ["Skin", "Brain", "Liver", "Heart"],
+                answer: "Brain"
             },
             {
                 question: "Which part of the plant transports water from roots to",
@@ -318,10 +320,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Mercury"
             },
             {
-                question: "What type of energy is stored in",
-                keynote: "Food ?",
-                option: ["Heat energy", "Chemical energy", "Electrical energy", "Kinetic energy"],
-                answer: "Chemical energy"
+                question: "Which process converts",
+                keynote: "Food into energy ?",
+                option: ["Digestion", "Respiration", "Excretion", "Circulation"],
+                answer: "Respiration"
             },
             {
                 question: "Which organ is responsible for filtering blood in",
@@ -330,10 +332,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Kidney"
             },
             {
-                question: "Which acid is present in the human",
-                keynote: "Stomach ?",
-                option: ["Sulfuric acid", "Nitric acid", "Hydrochloric acid", "Acetic acid"],
-                answer: "Hydrochloric acid"
+                question: "Which part of blood",
+                keynote: "Helps in clotting ?",
+                option: ["Plasma", "RBC", "WBC", "Platelets"],
+                answer: "Platelets"
             },
             {
                 question: "Which substance conducts electricity",
@@ -484,10 +486,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 answer: "Ural"
             },
             {
-                question: "Which sea separates",
-                keynote: "Europe from Africa ?",
-                option: ["Black Sea", "Red Sea", "Arabian Sea", "Mediterranean Sea"],
-                answer: "Mediterranean Sea"
+                question: "Which river is the longest in",
+                keynote: "The world ?",
+                option: ["Amazon", "Nile", "Yangtze", "Mississippi"],
+                answer: "Nile"
             },
             {
                 question: "Which country uses the currency",
@@ -826,6 +828,7 @@ document.addEventListener("DOMContentLoaded", function () {
         correctAnswer = 0;
         categoryIndex = 0;
         resetFunction();
+        optionReset();
     })
 
     playAgainBtn.addEventListener("click", function() {
@@ -1013,21 +1016,34 @@ document.addEventListener("DOMContentLoaded", function () {
         displayTime.textContent = `${m}:${s}`;
 
             let resultImg = document.createElement("img");
-            console.log(quizData[categoryIndex].length);
             if(accuracyRate === 0) {
                 resultImg.setAttribute("src", "quest-icon/result-0.png");
+                resultContentTitle.innerHTML = `<h1>Don't Give Up!</h1>
+                                                <h3>Every Expert Starts Somewhere</h3>`;
             } else if(accuracyRate <= 25) {
                 resultImg.setAttribute("src", "quest-icon/result-quarter.png");
+                resultContentTitle.innerHTML = `<h1>You Can Do Better!</h1>
+                                                <h3>Practice makes progress</h3>`;
             } else if(accuracyRate < 50) {
                 resultImg.setAttribute("src", "quest-icon/below-half.png");
+                resultContentTitle.innerHTML = `<h1>You are Learning!</h1>
+                                                <h3>You are getting there</h3>`;
             } else if(accuracyRate === 50) {
                 resultImg.setAttribute("src", "quest-icon/result-5.png");
+                resultContentTitle.innerHTML = `<h1>Good Effort!</h1>
+                                                <h3>Not Bad — Keep Practicing</h3>`;
             } else if(accuracyRate > 50 && accuracyRate < 75) {
                 resultImg.setAttribute("src", "quest-icon/above-half.png");
-            } else if(accuracyRate >= 75) {
+                resultContentTitle.innerHTML = `<h1>You are Improving!</h1>
+                                                <h3>Momentum looks good</h3>`;
+            } else if(accuracyRate >= 75 && accuracyRate < 100) {
                 resultImg.setAttribute("src", "quest-icon/below-goal.png");
+                resultContentTitle.innerHTML = `<h1>Almost Perfect!</h1>
+                                                <h3>One step away from the top</h3>`;
             } else if(accuracyRate === 100) {
                 resultImg.setAttribute("src", "quest-icon/reach-goal.png");
+                resultContentTitle.innerHTML = `<h1>Flawless Victory!</h1>
+                                                <h3>Every answer was correct</h3>`;
             };
             resultImg.alt = "Result Image";
             resultImage.appendChild(resultImg);
