@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const homeButton = document.querySelector(".home");
     const resultImage = document.querySelector(".result-image");
     const resultContentTitle = document.querySelector(".result-context");
-    const resultContent = document.querySelector(".result-context h3");
     const modeDiv = document.querySelector(".mode");
     const analysisBtn = document.querySelector(".analysis-box button");
     const analysisDiv = document.querySelector(".analysis-overlay");
